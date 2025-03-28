@@ -5,5 +5,8 @@ using TMPro;
 
 public class Letter : MonoBehaviour
 {
-    [SerializeField] int Position;
+    public string GetLetter()
+    {
+        return FindObjectOfType<Letter>().GetComponent<TextMeshPro>().text;
+    }
 }
