@@ -284,6 +284,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86cba86540e50cc4885dea562d5e1605, type: 3}
+--- !u!1 &436598488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 436598490}
+  - component: {fileID: 436598489}
+  m_Layer: 0
+  m_Name: StockPile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &436598489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436598488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dabef1786de94240ab782ff2bb0585e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &436598490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436598488}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 909.9329, y: 522.83124, z: 5.5861278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453380554
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca72dc90740f1f438eb0c12dc7392c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand: []
+  handSize: 4
 --- !u!1 &1594918024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6132221131008802523}
     m_Modifications:
+    - target: {fileID: 703998655414098773, guid: 85e22da16b7f3a0419ddb27ec18ef2c9, type: 3}
+      propertyPath: currentLetter
+      value: 111
+      objectReference: {fileID: 0}
     - target: {fileID: 3551229180022098309, guid: 85e22da16b7f3a0419ddb27ec18ef2c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1281,3 +1331,4 @@ SceneRoots:
   - {fileID: 6132221131008802523}
   - {fileID: 380450367}
   - {fileID: 1594918026}
+  - {fileID: 436598490}

@@ -14,9 +14,27 @@ public class GameSession : MonoBehaviour
     private Card selectedCard;
     private int selectedRange;
 
+    private Deck deck;
+    private StockPile stockPile;
+    private Hand hand;
+
     void Start()
     {
-        SetStartWord(startWord);    
+        deck = FindObjectOfType<Deck>();
+        stockPile = FindObjectOfType<StockPile>();
+        hand = FindObjectOfType<Hand>();
+
+        deck.InitializeCard();
+        DealInitialCards();
+        SetStartWord(startWord);
+    }
+
+    public void DealInitialCards()
+    {
+        for (int i = 0; i < hand.handSize; i++)
+        {
+            hand.AddCard(deck.DrawCard());
+        }
     }
 
     public void SetStartWord(string newWord)
@@ -44,52 +62,73 @@ public class GameSession : MonoBehaviour
 
     void UpdateStartWord()
     {
-        string currentWord = "";
+        startWord = "";
         foreach (var letter in letters)
         {
-            currentWord += letter.currentLetter;
+            startWord += letter.currentLetter;
         }
-        startWord = currentWord;
     }
 
     bool CheckWin()
     {
-        if (startWord == goalWord)
-        {
-            return true;
-        }
-        return false;
+        return startWord == goalWord;
     }
 
-    public void ApplyCard(Card card)
+    public void ApplyCard(int letterIndex)
     {
-        switch (card.Type)
+        if (selectedCard == null || letterIndex < 0 || letterIndex >= letters.Count)
+            return;
+
+        switch (selectedCard.Type)
         {
             case CardType.Addition:
+                letters[letterIndex].UpdateLetter(ShiftLetter(letters[letterIndex].currentLetter, selectedRange));
                 break;
             case CardType.Subtraction:
+                letters[letterIndex].UpdateLetter(ShiftLetter(letters[letterIndex].currentLetter, -selectedRange));
                 break;
             case CardType.Multiplication:
-                break;
-            case CardType.Division:
+                letters[letterIndex].UpdateLetter(Multiply(letterIndex, selectedRange));
                 break;
             case CardType.Swap:
+                Swap();
                 break;
             case CardType.Ceasar:
+                
                 break;
         }
+
+        UpdateStartWord();
+
+        if (CheckWin())
+        {
+            Debug.Log("You Win!");
+        }
+
+        hand.RemoveCard(selectedCard);
+        stockPile.AddCard(selectedCard);
+        selectedCard = null;
     }
 
-    char ShiftLetter(char letter, int shiftAmount)
+    private char ShiftLetter(char letterPosition, int shiftAmount)
     {
-        int letterIndex = letter - 'A';
+        int letterIndex = letterPosition - 'A';
         int newIndex = (letterIndex + shiftAmount) % 26;
 
         return (char)('A' + newIndex);
     }
 
-    public void Multiply(int letterPosition, int byHowMuch)
+    private char Multiply(int letterPosition, int shiftAmount)
     {
-        
+        int letterIndex = letters[letterPosition].currentLetter - 'A';
+        int newIndex = (letterIndex * shiftAmount) % 26;
+
+        return (char)('A' + newIndex);
+
+    }
+
+    public void Swap()
+    {
+
     }
 }

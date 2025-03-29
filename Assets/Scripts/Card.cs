@@ -16,7 +16,7 @@ public class Card : MonoBehaviour
 {
     public CardType Type;
     public int lowerBound = 1;
-    public int upperBound = 1;
+    public int upperBound = 2;
 
     public void OnClick()
     {
