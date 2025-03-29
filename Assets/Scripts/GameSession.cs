@@ -1,135 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSession : MonoBehaviour
-{
-    [SerializeField] string goalWord;
-    [SerializeField] string startWord;
+{   
+    public static GameSession Instance { get; private set; }
 
-    [SerializeField] List<Letter> letters = new();
-
-    private Card selectedCard;
-    private int selectedRange;
-
-    private Deck deck;
-    private StockPile stockPile;
-    private Hand hand;
-
-    void Start()
+    private void Awake()
     {
-        deck = FindObjectOfType<Deck>();
-        stockPile = FindObjectOfType<StockPile>();
-        hand = FindObjectOfType<Hand>();
-
-        deck.InitializeCard();
-        DealInitialCards();
-        SetStartWord(startWord);
-    }
-
-    public void DealInitialCards()
-    {
-        for (int i = 0; i < hand.handSize; i++)
+        if (Instance != null && Instance != this)
         {
-            hand.AddCard(deck.DrawCard());
-        }
-    }
-
-    public void SetStartWord(string newWord)
-    {
-        startWord = newWord;
-
-        for (int i = 0; i < letters.Count; i++)
-        {
-            letters[i].UpdateLetter(newWord[i]);
-        }
-    }
-
-    public void SelectRange(int value)
-    {
-        if (selectedCard != null && value >= selectedCard.lowerBound && value <= selectedCard.upperBound)
-        {
-            selectedRange = value;
-        }
-    }
-
-    public void CardClicked(Card card)
-    {
-        selectedCard = card;
-        Debug.Log("Card clicked!");
-    }
-
-    void UpdateStartWord()
-    {
-        startWord = "";
-        foreach (var letter in letters)
-        {
-            startWord += letter.currentLetter;
-        }
-    }
-
-    bool CheckWin()
-    {
-        return startWord == goalWord;
-    }
-
-    public void ApplyCard(int letterIndex)
-    {
-        if (selectedCard == null || letterIndex < 0 || letterIndex >= letters.Count)
+            Destroy(gameObject);
             return;
-
-        switch (selectedCard.Type)
-        {
-            case CardType.Addition:
-                letters[letterIndex].UpdateLetter(ShiftLetter(letters[letterIndex].currentLetter, selectedRange));
-                break;
-            case CardType.Subtraction:
-                letters[letterIndex].UpdateLetter(ShiftLetter(letters[letterIndex].currentLetter, -selectedRange));
-                break;
-            case CardType.Multiplication:
-                letters[letterIndex].UpdateLetter(Multiply(letterIndex, selectedRange));
-                break;
-            case CardType.Swap:
-                Swap();
-                break;
-            case CardType.Ceasar:
-                
-                break;
         }
-
-        UpdateStartWord();
-
-        if (CheckWin())
-        {
-            Debug.Log("You Win!");
-        }
-
-        hand.RemoveCard(selectedCard);
-        stockPile.AddCard(selectedCard);
-        selectedCard = null;
+        Instance = this;
+        SetPlayersDeck();
+        DontDestroyOnLoad(gameObject);
     }
 
-    private char ShiftLetter(char letterPosition, int shiftAmount)
+    public enum CardType
     {
-        int letterIndex = letterPosition - 'A';
-        int newIndex = (letterIndex + shiftAmount) % 26;
-
-        return (char)('A' + newIndex);
+        SmallPlus,
+        BigPlus,
+        SmallMinus,
+        BigMinus,
+        Multiplication,
+        Division,
+        Swap,
+        Ceasar
     }
 
-    private char Multiply(int letterPosition, int shiftAmount)
+    [SerializeField] List<CardType> startingDeck;
+
+    // Player's stats
+    public int currentLevel;
+    public List<CardType> playerDeck;
+
+    // Upgrades
+    public int handSize = 3;
+    public int handsCount = 5;
+    public int shopCardCount = 3;
+    public int smallSignUpperBound = 3;
+    public int bigSignUpperBound = 8;
+    public int multiplicationUpperBound = 3;
+    public int divisionUpperBound = 3;
+
+    void SetPlayersDeck()
     {
-        int letterIndex = letters[letterPosition].currentLetter - 'A';
-        int newIndex = (letterIndex * shiftAmount) % 26;
-
-        return (char)('A' + newIndex);
-
-    }
-
-    public void Swap()
-    {
-
+        playerDeck = startingDeck;
     }
 }
