@@ -47,12 +47,6 @@ public class ShopManager : MonoBehaviour
         ChoosePossibleUpgrades();
         SetUpShop();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void SetUpShop()
     {
@@ -113,6 +107,47 @@ public class ShopManager : MonoBehaviour
         else
         {
             // TODO: add effect for telling player he has no tokens.
+        }
+    }
+
+    public void BuyUpgrade(int slotIndex)
+    {
+        if (tokensToSpend > 0)
+        {
+            CarryOutUpdate(upgradeVendingMachine[slotIndex]);
+            tokensToSpend -= 1;
+        }
+        else
+        {
+            // TODO: add effect for telling player he has no tokens.
+        }
+    }
+
+    public void CarryOutUpdate(UpgradeType upgrade)
+    {
+        switch (upgrade)
+        {
+            case UpgradeType.smallSignUpgrade:
+                myGameSession.smallSignUpperBound += 1;
+                break;
+            case UpgradeType.bigSignUpgrade:
+                myGameSession.bigSignUpperBound += 1;
+                break;
+            case UpgradeType.multiplicationUpgrade:
+                myGameSession.multiplicationUpperBound += 1;
+                break;
+            case UpgradeType.divisionUgrade:
+                myGameSession.divisionUpperBound += 1;
+                break;
+            case UpgradeType.handSizeUpgrade:
+                myGameSession.handSize += 1;
+                break;
+            case UpgradeType.handCoundUpgrade:
+                myGameSession.handsCount += 1;
+                break;
+            case UpgradeType.shopUpgrade:
+                myGameSession.shopCardCount += 1;
+                break;
         }
     }
 
