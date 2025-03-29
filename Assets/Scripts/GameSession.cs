@@ -55,9 +55,10 @@ public class GameSession : MonoBehaviour
         }
     }
 
-    public void SelectCard(Card card)
+    public void CardClicked(Card card)
     {
         selectedCard = card;
+        Debug.Log("Card clicked!");
     }
 
     void UpdateStartWord()
