@@ -68,4 +68,9 @@ public class GameSession : MonoBehaviour
 
         return (startingWord, goalWord);
     }
+
+    public void AddCard(CardType newType)
+    {
+        playerDeck.Add(newType);
+    }
 }
