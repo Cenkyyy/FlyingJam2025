@@ -32,10 +32,12 @@ public class GameSession : MonoBehaviour
         Ceasar
     }
 
+    [SerializeField] List<string> startingWords;
+    [SerializeField] List<string> goalWords;
     [SerializeField] List<CardType> startingDeck;
 
     // Player's stats
-    public int currentLevel;
+    public int currentLevel = 1;
     public List<CardType> playerDeck;
 
     // Upgrades
@@ -47,8 +49,28 @@ public class GameSession : MonoBehaviour
     public int multiplicationUpperBound = 3;
     public int divisionUpperBound = 3;
 
+    System.Random random = new System.Random();
+
     void SetPlayersDeck()
     {
         playerDeck = startingDeck;
+    }
+
+    public (string, string) GetNextWordsPair()
+    {
+        int randomIndex = random.Next(startingWords.Count);
+
+        string startingWord = startingWords[randomIndex];
+        string goalWord = goalWords[randomIndex];
+
+        startingWords.RemoveAt(randomIndex);
+        goalWords.RemoveAt(randomIndex);
+
+        return (startingWord, goalWord);
+    }
+
+    public void AddCard(CardType newType)
+    {
+        playerDeck.Add(newType);
     }
 }
