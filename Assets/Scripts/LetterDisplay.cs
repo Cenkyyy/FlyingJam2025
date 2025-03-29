@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LetterDisplay : MonoBehaviour
 {
-    [SerializeField] int id;
+    [SerializeField] int positionID;
     
     private char currentLetter;
     private TextMeshProUGUI text;
@@ -19,7 +19,7 @@ public class LetterDisplay : MonoBehaviour
 
     public void UpdateText()
     {
-        currentLetter = myEditor.GetLettersChar(id);
+        currentLetter = myEditor.GetLettersChar(positionID);
         text.text = currentLetter.ToString();
     }
 

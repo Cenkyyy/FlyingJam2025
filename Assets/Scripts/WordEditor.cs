@@ -8,7 +8,6 @@ using UnityEngine;
 public class WordEditor : MonoBehaviour
 {
     private GameSession myGameSession;
-    private List<LetterDisplay> letters;
     private string currentWord;
     private string goalWord;
 
@@ -18,13 +17,22 @@ public class WordEditor : MonoBehaviour
     void Start()
     {
         myGameSession = FindObjectOfType<GameSession>();
-        letters = FindObjectsOfType<LetterDisplay>().ToList();
         (currentWord, goalWord) = myGameSession.GetNextWordsPair();
     }
 
-    public char GetLettersChar(int letterID)
+    public char GetLettersChar(int letterPosID)
     {
-        return currentWord[letterID];
+        return currentWord[letterPosID];
+    }
+
+    public void SetClickedCardType(GameSession.CardType type)
+    {
+        cardType = type;
+    }
+
+    public void SetClickedCardValue(int value)
+    {
+        cardValue = value;
     }
 
     public void ApplyCardOperation(int letterPosToChange)
