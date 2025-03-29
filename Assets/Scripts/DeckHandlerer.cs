@@ -24,6 +24,7 @@ public class DeckHandlerer : MonoBehaviour
 
     public void OnHandCardClicked(Card card)
     {
+        // Make it not visible
         // Display overlay with all possible cards in the middle of the Screen
     }
 }
