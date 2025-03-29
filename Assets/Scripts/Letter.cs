@@ -5,8 +5,25 @@ using TMPro;
 
 public class Letter : MonoBehaviour
 {
-    public string GetLetter()
+    public char currentLetter;
+    private TextMeshProUGUI text;
+
+    private void Start()
     {
-        return FindObjectOfType<Letter>().GetComponent<TextMeshPro>().text;
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        if (text != null)
+        {
+            text.text = currentLetter.ToString();
+        }
+    }
+
+    public void UpdateLetter(char newLetter)
+    {
+        currentLetter = newLetter;
+        UpdateText();
     }
 }
