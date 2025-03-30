@@ -17,12 +17,14 @@ public class DeckHandlerer : MonoBehaviour
     [SerializeField] List<GameObject> handCards;
 
     private GameSession gameSession;
+    private WordEditor wordEditor;
     private List<GameSession.CardType> deck;
     private int lastClickedHandCardID;
 
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
+        wordEditor = FindObjectOfType<WordEditor>();
         backgroundButtonCollider.SetActive(false);
     }
 
@@ -37,36 +39,49 @@ public class DeckHandlerer : MonoBehaviour
         return 0;
     }
 
+    public int GetLastCardID()
+    {
+        return lastClickedHandCardID;
+    }
+
+    public List<GameObject> GetHandCards()
+    {
+        return handCards;
+    }
+
+
     public void OnHandCardClicked(int positionID)
     {
         backgroundButtonCollider.SetActive(true);
-
-        lastClickedHandCardID = positionID;
-        GameSession.CardType type = deck[positionID];
-        List<GameObject> overlayToDisplay;
         
+        lastClickedHandCardID = positionID;
+        
+        GameSession.CardType type = deck[positionID];
+        wordEditor.SetClickedCardType(type);
+        
+        List<GameObject> overlayToDisplay;
         switch (type)
         {
             case GameSession.CardType.SmallPlus:
                 overlayToDisplay = smallMinusCards;
                 break;
             case GameSession.CardType.BigPlus:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = bigPlusCards;
                 break;
             case GameSession.CardType.SmallMinus:
                 overlayToDisplay = smallMinusCards;
                 break;
             case GameSession.CardType.BigMinus:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = bigMinusCards;
                 break;
             case GameSession.CardType.Multiplication:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = multiplicationCards;
                 break;
             case GameSession.CardType.Division:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = divisionCards;
                 break;
             case GameSession.CardType.Ceasar:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = ceasarCards;
                 break;
             default:
                 return;
@@ -86,7 +101,7 @@ public class DeckHandlerer : MonoBehaviour
     public void OnValueCardClicked()
     {
         backgroundButtonCollider.SetActive(false);
-
+        
         OnValueCardClickedHelper(smallPlusCards);
         OnValueCardClickedHelper(bigPlusCards);
         OnValueCardClickedHelper(smallMinusCards);
@@ -94,9 +109,6 @@ public class DeckHandlerer : MonoBehaviour
         OnValueCardClickedHelper(multiplicationCards);
         OnValueCardClickedHelper(divisionCards);
         OnValueCardClickedHelper(ceasarCards);
-
-        // remove last clicked hand card
-        handCards[lastClickedHandCardID].SetActive(false);
     }
 
     private void OnValueCardClickedHelper(List<GameObject> cards)
