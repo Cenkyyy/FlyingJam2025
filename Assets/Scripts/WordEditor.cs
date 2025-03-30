@@ -22,6 +22,8 @@ public class WordEditor : MonoBehaviour
     private GameSession gameSession;
     private SceneLoader sceneLoader;
 
+    private int tmp = 0;
+
     void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
@@ -30,7 +32,16 @@ public class WordEditor : MonoBehaviour
         myGameSession = FindObjectOfType<GameSession>();
         myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
         letters = FindObjectsOfType<LetterDisplay>().ToList();
-        (currentWord, goalWord) = myGameSession.GetNextWordsPair();
+
+        if (tmp == 0)
+        {
+            currentWord = "hero";
+            goalWord = "zero";
+        }
+        else
+        {
+            (currentWord, goalWord) = myGameSession.GetNextWordsPair();
+        }
     }
 
     public char GetLettersChar(int letterPosID)
