@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,6 @@ public class DeckHandlerer : MonoBehaviour
 
     void Start()
     {
-        
         gameSession = FindObjectOfType<GameSession>();
         wordEditor = FindObjectOfType<WordEditor>();
         backgroundButtonCollider.SetActive(false);
@@ -135,46 +135,53 @@ public class DeckHandlerer : MonoBehaviour
     {
         lastClickedHandCardID = positionID;
         GameSession.CardType type = deck[positionID];
-        Debug.Log(type);
-        
+
         wordEditor.SetClickedCardType(type);
         
         List<GameObject> overlayToDisplay;
+        int cardsSize;
         switch (type)
         {
             case GameSession.CardType.SmallPlus:
                 overlayToDisplay = smallPlusCards;
+                cardsSize = gameSession.smallSignUpperBound;
                 break;
             case GameSession.CardType.BigPlus:
                 overlayToDisplay = bigPlusCards;
+                cardsSize = gameSession.bigSignUpperBound;
                 break;
             case GameSession.CardType.SmallMinus:
                 overlayToDisplay = smallMinusCards;
+                cardsSize = gameSession.smallSignUpperBound;
                 break;
             case GameSession.CardType.BigMinus:
                 overlayToDisplay = bigMinusCards;
+                cardsSize = gameSession.bigSignUpperBound;
                 break;
             case GameSession.CardType.Multiplication:
                 overlayToDisplay = multiplicationCards;
+                cardsSize = gameSession.multiplicationUpperBound;
                 break;
             case GameSession.CardType.Division:
                 overlayToDisplay = divisionCards;
+                cardsSize = gameSession.divisionUpperBound;
                 break;
             case GameSession.CardType.Ceasar:
                 overlayToDisplay = ceasarCards;
+                cardsSize = 6;
                 break;
             default:
                 return;
         }
         backgroundButtonCollider.SetActive(true);
-        OnHandCardClickedHelper(overlayToDisplay);
+        OnHandCardClickedHelper(overlayToDisplay, cardsSize);
     }
 
-    private void OnHandCardClickedHelper(List<GameObject> cards)
+    private void OnHandCardClickedHelper(List<GameObject> cards, int count)
     {
-        foreach (var card in cards)
+        for(int i = 0; i < count; i++)
         {
-            card.SetActive(true);
+            cards[i].SetActive(true);
         }
     }
 

@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * When a hand card is clicked, overlay is shown
- * When a overlay card is clicked, overlay is disables,
- * Letter is clicked, word is updated and used hand card is removed
- */
-
 public class Card : MonoBehaviour
 {
     [SerializeField] int positionID;

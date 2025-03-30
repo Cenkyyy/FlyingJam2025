@@ -19,9 +19,13 @@ public class WordEditor : MonoBehaviour
 
     private DeckHandlerer myDeckHandlerer;
     private HandDisplay handDisplay;
+    private GameSession gameSession;
+    private SceneLoader sceneLoader;
 
     void Start()
     {
+        sceneLoader = FindObjectOfType<SceneLoader>();
+        gameSession = FindObjectOfType<GameSession>();
         handDisplay = FindObjectOfType<HandDisplay>();
         myGameSession = FindObjectOfType<GameSession>();
         myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
@@ -79,13 +83,44 @@ public class WordEditor : MonoBehaviour
         List<GameObject> handCards = myDeckHandlerer.GetHandCards();
         handCards[myDeckHandlerer.GetLastCardID()].SetActive(false);
 
+        if (HasWon())
+        {
+            // YOU WIN
+            sceneLoader.LoadNextScene();
+        }
+
         if (myDeckHandlerer.IsHandEmpty())
         {
-            myDeckHandlerer.GetNewHand();
-            handDisplay.UpdateHandsCounter();
+            Debug.Log("Is empty");
+            if (gameSession.handSize == 0)
+            {
+                Debug.Log("Should lose");
+                // YOU LOSE
+                sceneLoader.LoadLoseScreen();
+            }
+            else
+            {
+                Debug.Log("next hand");
+                myDeckHandlerer.GetNewHand();
+                handDisplay.UpdateHandsCounter();
+            }
         }
 
         cardType = GameSession.CardType.Invalid;
+    }
+
+    // Coroutine that waits 1 second before going into the shop
+    private IEnumerator WinDelay()
+    {
+        yield return new WaitForSeconds(1f);  // Wait for 1 second
+        
+    }
+
+    // Coroutine that waits 1 second before going into the shop
+    private IEnumerator LoseDelay()
+    {
+        yield return new WaitForSeconds(1f);  // Wait for 1 second
+        
     }
 
     private void UpdateTextOfAllLetters()
@@ -134,7 +169,7 @@ public class WordEditor : MonoBehaviour
         }
     }
 
-    public bool IsSame()
+    public bool HasWon()
     {
         return currentWord == goalWord;
     }
