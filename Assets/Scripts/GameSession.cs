@@ -28,7 +28,7 @@ public class GameSession : MonoBehaviour
         BigMinus,
         Multiplication,
         Division,
-        Swap,
+        Invalid,
         Ceasar
     }
 

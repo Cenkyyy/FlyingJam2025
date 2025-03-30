@@ -23,6 +23,7 @@ public class LetterDisplay : MonoBehaviour
         text.text = currentLetter.ToString();
     }
 
+    // Not used
     public int GetLetterIndex()
     {
         return currentLetter - 'a' + 1;

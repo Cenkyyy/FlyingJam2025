@@ -11,12 +11,18 @@ public class WordEditor : MonoBehaviour
     private string currentWord;
     private string goalWord;
 
-    private GameSession.CardType cardType;
+    private GameSession.CardType cardType = GameSession.CardType.Invalid;
     private int cardValue;
+
+    private List<LetterDisplay> letters;
+
+    private DeckHandlerer myDeckHandlerer;
 
     void Start()
     {
         myGameSession = FindObjectOfType<GameSession>();
+        myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
+        letters = FindObjectsOfType<LetterDisplay>().ToList();
         (currentWord, goalWord) = myGameSession.GetNextWordsPair();
     }
 
@@ -37,6 +43,12 @@ public class WordEditor : MonoBehaviour
 
     public void ApplyCardOperation(int letterPosToChange)
     {
+        if (cardType == GameSession.CardType.Invalid)
+        {
+            // TODO tell player invalid card
+            return;
+        }
+
         switch (cardType)
         {
             case GameSession.CardType.SmallPlus:
@@ -51,13 +63,27 @@ public class WordEditor : MonoBehaviour
             case GameSession.CardType.Division:
                 Division(letterPosToChange, cardValue);
                 break;
-            case GameSession.CardType.Swap:
-                break;
             case GameSession.CardType.Ceasar:
                 Ceasar(cardValue);
                 break;
             default:
                 break;
+        }
+
+        UpdateTextOfAllLetters();
+
+        // remove last clicked card
+        List<GameObject> handCards = myDeckHandlerer.GetHandCards();
+        handCards[myDeckHandlerer.GetLastCardID()].SetActive(false);
+
+        cardType = GameSession.CardType.Invalid;
+    }
+
+    private void UpdateTextOfAllLetters()
+    {
+        foreach (var letter in letters)
+        {
+            letter.UpdateText();
         }
     }
 
