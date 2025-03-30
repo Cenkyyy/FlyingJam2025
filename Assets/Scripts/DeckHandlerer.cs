@@ -148,7 +148,7 @@ public class DeckHandlerer : MonoBehaviour
                 break;
             case GameSession.CardType.BigPlus:
                 overlayToDisplay = bigPlusCards;
-                cardsSize = gameSession.bigSignUpperBound;
+                cardsSize = gameSession.bigSignUpperBound - 5;
                 break;
             case GameSession.CardType.SmallMinus:
                 overlayToDisplay = smallMinusCards;
@@ -156,7 +156,7 @@ public class DeckHandlerer : MonoBehaviour
                 break;
             case GameSession.CardType.BigMinus:
                 overlayToDisplay = bigMinusCards;
-                cardsSize = gameSession.bigSignUpperBound;
+                cardsSize = gameSession.bigSignUpperBound - 5;
                 break;
             case GameSession.CardType.Multiplication:
                 overlayToDisplay = multiplicationCards;

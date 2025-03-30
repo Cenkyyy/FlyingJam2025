@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: cfdb56583017672459bf2a2f6c1579fa
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/Game Scene.unity
     guid: 0c4b15a6559432145ae2cb4bd72d4cf8
   - enabled: 1
     path: Assets/Scenes/Shop.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win Screen.unity
     guid: 87e1fd9eee23eeb4aa912f0ad29772dd
+  - enabled: 1
+    path: Assets/Scenes/Lose screen.unity
+    guid: 133e3bdbe5bbb5b4ebb3d9e6969afb4a
   m_configObjects: {}

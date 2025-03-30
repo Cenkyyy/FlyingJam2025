@@ -86,21 +86,20 @@ public class WordEditor : MonoBehaviour
         if (HasWon())
         {
             // YOU WIN
+            WinDelay();
             sceneLoader.LoadNextScene();
         }
 
         if (myDeckHandlerer.IsHandEmpty())
         {
-            Debug.Log("Is empty");
-            if (gameSession.handSize == 0)
+            if (gameSession.handsCount <= 0)
             {
-                Debug.Log("Should lose");
                 // YOU LOSE
+                LoseDelay();
                 sceneLoader.LoadLoseScreen();
             }
             else
             {
-                Debug.Log("next hand");
                 myDeckHandlerer.GetNewHand();
                 handDisplay.UpdateHandsCounter();
             }
