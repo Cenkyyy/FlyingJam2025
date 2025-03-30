@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static GameSession;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class ShopManager : MonoBehaviour
         divisionUgrade,
     }
 
+    [SerializeField] Sprite[] cardSprites;
+    [SerializeField] Sprite[] upgradeSprites;
+
     [SerializeField] int maxCardSlots = 16;
     [SerializeField] int maxUpgradeSlots = 16;
 
@@ -28,14 +32,20 @@ public class ShopManager : MonoBehaviour
     int cardsPerMachine;
     int tokensToSpend;
 
-    Dictionary<int, CardType> cardVendinMachine;
+    Dictionary<int, CardType> cardVendingMachine;
     Dictionary<int, UpgradeType> upgradeVendingMachine;
+
+    [SerializeField] List<VendingItemPopup> cardItems;
+    [SerializeField] List<VendingItemPopup> upgradeItems;
+
+    [SerializeField] List<GameObject> cardPopups;
+    [SerializeField] List<GameObject> upgradePopups;
+    
 
     System.Random rand = new System.Random();
 
     GameSession myGameSession;
 
-    // Start is called before the first frame update
     void Start()
     {
         myGameSession = FindObjectOfType<GameSession>();
@@ -46,14 +56,62 @@ public class ShopManager : MonoBehaviour
         currentUpgradeSlots = GetRandomNumbers(maxUpgradeSlots, cardsPerMachine);
         ChoosePossibleUpgrades();
         SetUpShop();
+        SetActiveCards();
+        SetActiveUpgrades();
+        SetCardPopups();
+        SetUpgradePopups();
     }
-    
+
+    public void SetCardPopups()
+    {
+        foreach(int index in currentCardSlots)
+        {
+            cardPopups[index-1].GetComponent<Image>().sprite = cardSprites[(int)cardVendingMachine[index]];
+        }
+    }
+
+    public void SetUpgradePopups()
+    {
+        foreach (int index in currentUpgradeSlots)
+        {
+            upgradePopups[index - 1].GetComponent<Image>().sprite = upgradeSprites[(int)upgradeVendingMachine[index]];
+        }
+    }
+
+    public void SetActiveCards()
+    {
+        foreach(var item in cardItems)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        foreach(int index in currentCardSlots)
+        {
+            cardItems[index-1].gameObject.SetActive(true);
+        }
+    }
+
+    public void SetActiveUpgrades()
+    {
+        foreach (var item in upgradeItems)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        foreach (int index in currentUpgradeSlots)
+        {
+            upgradeItems[index-1].gameObject.SetActive(true);
+        }
+    }
+
     public void SetUpShop()
     {
         for (int i = 0; i < cardsPerMachine; i++)
         {
-            cardVendinMachine[currentCardSlots[i]] = 
-                GetRandomElement(Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList());
+            var cards = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
+            cards.Remove(CardType.Invalid);
+            cardVendingMachine[currentCardSlots[i]] = GetRandomElement(cards);
+
             upgradeVendingMachine[currentUpgradeSlots[i]] = GetRandomElement(possibleUpgrades);
         }
     }
@@ -101,7 +159,7 @@ public class ShopManager : MonoBehaviour
     {
         if (tokensToSpend > 0)
         {
-            myGameSession.AddCard(cardVendinMachine[slotIndex]);
+            myGameSession.AddCard(cardVendingMachine[slotIndex]);
             tokensToSpend -= 1;
         }
         else

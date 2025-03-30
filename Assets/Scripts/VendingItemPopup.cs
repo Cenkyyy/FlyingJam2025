@@ -7,14 +7,25 @@ public class VendingItemPopup : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     [SerializeField] GameObject popupBox;
 
+    bool follow = false;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         popupBox.SetActive(true);
-        popupBox.transform.position = Input.mousePosition; // Position near cursor
+        follow = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         popupBox.SetActive(false);
+        follow = false;
+    }
+
+    private void Update()
+    {
+        if (follow)
+        {
+            popupBox.transform.position = Input.mousePosition + new Vector3(0, 170, 0);
+        }
     }
 }
