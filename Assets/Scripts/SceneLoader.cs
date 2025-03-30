@@ -10,6 +10,21 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    public void LoadLoseScreen()
+    {
+        SceneManager.LoadScene("Lose Screen");
+    }
+
+    public void LoadWinScreen()
+    {
+        SceneManager.LoadScene("Win Screen");
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene("Game Scene");
+    }
+
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

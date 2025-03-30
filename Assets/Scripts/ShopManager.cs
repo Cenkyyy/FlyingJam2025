@@ -53,10 +53,6 @@ public class ShopManager : MonoBehaviour
         tokensToSpend = 2;
         cardsPerMachine = myGameSession.shopCardCount;
         currentCardSlots = GetRandomNumbers(maxCardSlots, cardsPerMachine);
-        foreach(var item in currentCardSlots)
-        {
-            Debug.Log(item);
-        }
         currentUpgradeSlots = GetRandomNumbers(maxUpgradeSlots, cardsPerMachine);
         ChoosePossibleUpgrades();
         SetUpShop();
@@ -112,8 +108,6 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < cardsPerMachine; i++)
         {
-            Debug.Log(i);
-
             var cards = Enum.GetValues(typeof(CardType)).Cast<CardType>().ToList();
             cards.Remove(CardType.Invalid);
             cardVendingMachine[currentCardSlots[i]] = GetRandomElement(cards);
@@ -170,6 +164,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("no tokens");
             // TODO: add effect for telling player he has no tokens.
         }
     }
@@ -183,6 +178,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("no tokens");
             // TODO: add effect for telling player he has no tokens.
         }
     }
