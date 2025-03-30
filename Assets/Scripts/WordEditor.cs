@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class WordEditor : MonoBehaviour
 {
@@ -90,6 +91,7 @@ public class WordEditor : MonoBehaviour
     private void ApplyOperation(int letterPosToChange, Func<int, int, int> operation)
     {
         StringBuilder wordBuilder = new StringBuilder(currentWord);
+
         int currLetterIndex = wordBuilder[letterPosToChange] - 'a';
 
         int newLetterIndex = operation(currLetterIndex, cardValue);

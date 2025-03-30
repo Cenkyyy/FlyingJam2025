@@ -124,7 +124,7 @@ public class DeckHandlerer : MonoBehaviour
         switch (type)
         {
             case GameSession.CardType.SmallPlus:
-                overlayToDisplay = smallMinusCards;
+                overlayToDisplay = smallPlusCards;
                 break;
             case GameSession.CardType.BigPlus:
                 overlayToDisplay = bigPlusCards;

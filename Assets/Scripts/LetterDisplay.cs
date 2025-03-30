@@ -15,6 +15,7 @@ public class LetterDisplay : MonoBehaviour
     private void Start()
     {
         myEditor = FindObjectOfType<WordEditor>();
+        text = GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateText()
