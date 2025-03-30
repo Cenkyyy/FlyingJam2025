@@ -18,9 +18,11 @@ public class WordEditor : MonoBehaviour
     private List<LetterDisplay> letters;
 
     private DeckHandlerer myDeckHandlerer;
+    private HandDisplay handDisplay;
 
     void Start()
     {
+        handDisplay = FindObjectOfType<HandDisplay>();
         myGameSession = FindObjectOfType<GameSession>();
         myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
         letters = FindObjectsOfType<LetterDisplay>().ToList();
@@ -76,6 +78,12 @@ public class WordEditor : MonoBehaviour
         // remove last clicked card
         List<GameObject> handCards = myDeckHandlerer.GetHandCards();
         handCards[myDeckHandlerer.GetLastCardID()].SetActive(false);
+
+        if (myDeckHandlerer.IsHandEmpty())
+        {
+            myDeckHandlerer.GetNewHand();
+            handDisplay.UpdateHandsCounter();
+        }
 
         cardType = GameSession.CardType.Invalid;
     }

@@ -26,15 +26,16 @@ public class DeckHandlerer : MonoBehaviour
     private List<GameSession.CardType> deck = new();
     private int lastClickedHandCardID;
 
+
     void Start()
     {
+        
         gameSession = FindObjectOfType<GameSession>();
         wordEditor = FindObjectOfType<WordEditor>();
         backgroundButtonCollider.SetActive(false);
 
         StartCoroutine(DealCardsWithDelay());
     }
-
 
     // Coroutine that waits 1 second before dealing the cards
     private IEnumerator DealCardsWithDelay()
@@ -57,6 +58,18 @@ public class DeckHandlerer : MonoBehaviour
     public int GetLastCardID()
     {
         return lastClickedHandCardID;
+    }
+
+    public bool IsHandEmpty()
+    {
+        foreach (var card in handCards)
+        {
+            if (card.activeSelf)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<GameObject> GetHandCards()
@@ -110,6 +123,12 @@ public class DeckHandlerer : MonoBehaviour
         }
 
         SetHandCardsVisible();
+    }
+
+    public void GetNewHand()
+    {
+        StartCoroutine(DealCardsWithDelay());
+        gameSession.handsCount--;
     }
 
     public void OnHandCardClicked(int positionID)
