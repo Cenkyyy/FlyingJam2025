@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckHandlerer : MonoBehaviour
 {
     [SerializeField] GameObject backgroundButtonCollider;
+
+    [SerializeField] List<Sprite> operationSprites;
 
     [SerializeField] List<GameObject> smallPlusCards;
     [SerializeField] List<GameObject> bigPlusCards;
@@ -18,7 +23,7 @@ public class DeckHandlerer : MonoBehaviour
 
     private GameSession gameSession;
     private WordEditor wordEditor;
-    private List<GameSession.CardType> deck;
+    private List<GameSession.CardType> deck = new();
     private int lastClickedHandCardID;
 
     void Start()
@@ -26,6 +31,16 @@ public class DeckHandlerer : MonoBehaviour
         gameSession = FindObjectOfType<GameSession>();
         wordEditor = FindObjectOfType<WordEditor>();
         backgroundButtonCollider.SetActive(false);
+
+        StartCoroutine(DealCardsWithDelay());
+    }
+
+
+    // Coroutine that waits 1 second before dealing the cards
+    private IEnumerator DealCardsWithDelay()
+    {
+        yield return new WaitForSeconds(1f);  // Wait for 1 second
+        DealAndDisplayHandCards();
     }
 
     public GameSession.CardType GetCardsType(int positionID)
@@ -49,14 +64,60 @@ public class DeckHandlerer : MonoBehaviour
         return handCards;
     }
 
+    private void CardSetUp()
+    {
+        for (int i = 0; i < handCards.Count; i++)
+        {
+            if (i < gameSession.handSize)
+            {
+                handCards[i].SetActive(true);
+            }
+            else handCards[i].SetActive(false);
+        }
+    }
+
+    private void SetHandCardsVisible()
+    {
+        foreach (var handCard in handCards)
+        {
+            Image cardImage = handCard.GetComponent<Image>();
+            if (cardImage != null)
+            {
+                Color newColor = cardImage.color;
+                newColor.a = 1f;  // Set alpha to fully visible
+                cardImage.color = newColor;
+            }
+        }
+    }
+
+    public void DealAndDisplayHandCards()
+    {
+        CardSetUp();
+        System.Random random = new System.Random();
+        deck.Clear();
+
+        GameSession.CardType[] allCardTypes = Enum.GetValues(typeof(GameSession.CardType))
+            .Cast<GameSession.CardType>()
+            .Where(t => t != GameSession.CardType.Invalid)  // Exclude Invalid
+            .ToArray();
+
+        for (int i = 0; i < gameSession.handSize; i++)
+        {
+            int randomIndex = random.Next(allCardTypes.Length - 1);
+            Image cardImage = handCards[i].GetComponent<Image>();
+            deck.Add(allCardTypes[randomIndex]);
+            cardImage.sprite = operationSprites[randomIndex];
+        }
+
+        SetHandCardsVisible();
+    }
 
     public void OnHandCardClicked(int positionID)
     {
-        backgroundButtonCollider.SetActive(true);
-        
         lastClickedHandCardID = positionID;
-        
         GameSession.CardType type = deck[positionID];
+        Debug.Log(type);
+        
         wordEditor.SetClickedCardType(type);
         
         List<GameObject> overlayToDisplay;
@@ -86,7 +147,7 @@ public class DeckHandlerer : MonoBehaviour
             default:
                 return;
         }
-
+        backgroundButtonCollider.SetActive(true);
         OnHandCardClickedHelper(overlayToDisplay);
     }
 

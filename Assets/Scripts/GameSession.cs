@@ -28,8 +28,8 @@ public class GameSession : MonoBehaviour
         BigMinus,
         Multiplication,
         Division,
-        Invalid,
-        Ceasar
+        Ceasar,
+        Invalid
     }
 
     [SerializeField] List<string> startingWords;

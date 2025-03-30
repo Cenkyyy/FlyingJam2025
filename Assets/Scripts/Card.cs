@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * When a hand card is clicked, overlay is shown
+ * When a overlay card is clicked, overlay is disables,
+ * Letter is clicked, word is updated and used hand card is removed
+ */
+
 public class Card : MonoBehaviour
 {
     [SerializeField] int positionID;
@@ -19,21 +25,10 @@ public class Card : MonoBehaviour
     public void UpdateType()
     {
         type = myDeckHandlerer.GetCardsType(positionID);
-        UpdateSprite();
     }
 
     public void UpdateValue()
     {
         value = myDeckHandlerer.GetCardsValue(positionID);
-    }
-
-    private void UpdateSprite()
-    {
-        // alternaltive
-        //myDeckHandlerer.GetSprite()
-        switch (type)
-        {
-            // display different sprites
-        }
     }
 }
