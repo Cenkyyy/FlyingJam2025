@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeckHandlerer : MonoBehaviour
 {
+    [SerializeField] GameObject backgroundButtonCollider;
+
     [SerializeField] List<GameObject> smallPlusCards;
     [SerializeField] List<GameObject> bigPlusCards;
     [SerializeField] List<GameObject> smallMinusCards;
@@ -21,6 +23,7 @@ public class DeckHandlerer : MonoBehaviour
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
+        backgroundButtonCollider.SetActive(false);
     }
 
     public GameSession.CardType GetCardsType(int positionID)
@@ -36,6 +39,8 @@ public class DeckHandlerer : MonoBehaviour
 
     public void OnHandCardClicked(int positionID)
     {
+        backgroundButtonCollider.SetActive(true);
+
         lastClickedHandCardID = positionID;
         GameSession.CardType type = deck[positionID];
         List<GameObject> overlayToDisplay;
@@ -80,6 +85,8 @@ public class DeckHandlerer : MonoBehaviour
 
     public void OnValueCardClicked()
     {
+        backgroundButtonCollider.SetActive(false);
+
         OnValueCardClickedHelper(smallPlusCards);
         OnValueCardClickedHelper(bigPlusCards);
         OnValueCardClickedHelper(smallMinusCards);
@@ -88,6 +95,7 @@ public class DeckHandlerer : MonoBehaviour
         OnValueCardClickedHelper(divisionCards);
         OnValueCardClickedHelper(ceasarCards);
 
+        // remove last clicked hand card
         handCards[lastClickedHandCardID].SetActive(false);
     }
 
