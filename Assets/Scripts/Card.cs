@@ -20,13 +20,11 @@ public class Card : MonoBehaviour
     {
         type = myDeckHandlerer.GetCardsType(positionID);
         UpdateSprite();
-        // Display overlay
     }
 
     public void UpdateValue()
     {
         value = myDeckHandlerer.GetCardsValue(positionID);
-        // Disable overlay
     }
 
     private void UpdateSprite()
