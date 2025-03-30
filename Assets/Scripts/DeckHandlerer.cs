@@ -12,8 +12,11 @@ public class DeckHandlerer : MonoBehaviour
     [SerializeField] List<GameObject> divisionCards;
     [SerializeField] List<GameObject> ceasarCards;
 
+    [SerializeField] List<GameObject> handCards;
+
     private GameSession gameSession;
     private List<GameSession.CardType> deck;
+    private int lastClickedHandCardID;
 
     void Start()
     {
@@ -27,14 +30,44 @@ public class DeckHandlerer : MonoBehaviour
 
     public int GetCardsValue(int positionID)
     {
+        // TODO fix this
         return 0;
     }
 
     public void OnHandCardClicked(int positionID)
     {
+        lastClickedHandCardID = positionID;
+        GameSession.CardType type = deck[positionID];
+        List<GameObject> overlayToDisplay;
         
-        // Make it not visible
-        // Display overlay with all possible cards in the middle of the Screen
+        switch (type)
+        {
+            case GameSession.CardType.SmallPlus:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.BigPlus:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.SmallMinus:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.BigMinus:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.Multiplication:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.Division:
+                overlayToDisplay = smallMinusCards;
+                break;
+            case GameSession.CardType.Ceasar:
+                overlayToDisplay = smallMinusCards;
+                break;
+            default:
+                return;
+        }
+
+        OnHandCardClickedHelper(overlayToDisplay);
     }
 
     private void OnHandCardClickedHelper(List<GameObject> cards)
@@ -54,6 +87,8 @@ public class DeckHandlerer : MonoBehaviour
         OnValueCardClickedHelper(multiplicationCards);
         OnValueCardClickedHelper(divisionCards);
         OnValueCardClickedHelper(ceasarCards);
+
+        handCards[lastClickedHandCardID].SetActive(false);
     }
 
     private void OnValueCardClickedHelper(List<GameObject> cards)
