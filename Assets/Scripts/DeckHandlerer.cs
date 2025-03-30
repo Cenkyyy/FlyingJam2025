@@ -20,20 +20,29 @@ public class DeckHandlerer : MonoBehaviour
         gameSession = FindObjectOfType<GameSession>();
     }
 
-    public GameSession.CardType GetCardsType(int id)
+    public GameSession.CardType GetCardsType(int positionID)
     {
-        return deck[id];
+        return deck[positionID];
     }
 
-    public int GetCardsValue(int id)
+    public int GetCardsValue(int positionID)
     {
         return 0;
     }
 
-    public void OnHandCardClicked(Card card)
+    public void OnHandCardClicked(int positionID)
     {
+        
         // Make it not visible
         // Display overlay with all possible cards in the middle of the Screen
+    }
+
+    private void OnHandCardClickedHelper(List<GameObject> cards)
+    {
+        foreach (var card in cards)
+        {
+            card.SetActive(true);
+        }
     }
 
     public void OnValueCardClicked()
