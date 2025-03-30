@@ -170,8 +170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.62988, y: -418.81024}
-  m_SizeDelta: {x: 492.688, y: 196.6405}
+  m_AnchoredPosition: {x: 373.28, y: -443.7525}
+  m_SizeDelta: {x: 476.22, y: 163.3841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1040210534
 MonoBehaviour:
@@ -582,7 +582,11 @@ PrefabInstance:
     - target: {fileID: 8845045581117306563, guid: c2148515c0271f447af370fef940d516, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9dbe55f68b1201d468d3eac5bedc3b41, type: 3}
+      objectReference: {fileID: 21300000, guid: 7332cbdaa80779943866c1b3b5f22309, type: 3}
+    - target: {fileID: 8845045581117306563, guid: c2148515c0271f447af370fef940d516, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -655,7 +659,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1608076709490832884, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 351.7207
+      value: 476.2223
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608076709490832884, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 171.2523
       objectReference: {fileID: 0}
     - target: {fileID: 1608076709490832884, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
       propertyPath: m_LocalScale.x
@@ -671,11 +679,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1608076709490832884, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 89
+      value: 373.28418
       objectReference: {fileID: 0}
     - target: {fileID: 1608076709490832884, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -176
+      value: -202.31714
       objectReference: {fileID: 0}
     - target: {fileID: 3797809082064720152, guid: 9b426cd31ee45cc408355599370a58c0, type: 3}
       propertyPath: m_Name
