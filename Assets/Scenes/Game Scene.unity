@@ -5527,8 +5527,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWords:
   - hero
+  - tree
+  - book
+  - lamp
+  - fish
+  - game
+  - wind
+  - moon
+  - star
+  - rock
+  - fire
   goalWords:
   - zero
+  - desk
+  - 'coat  '
+  - jump
+  - song
+  - door
+  - bell
+  - snow
+  - leaf
+  - time
+  - wave
   startingDeck: 
   currentLevel: 1
   playerDeck: 

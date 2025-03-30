@@ -88,6 +88,7 @@ public class WordEditor : MonoBehaviour
             // YOU WIN
             if (gameSession.GetWordsCount() == 0)
             {
+                WinDelay();
                 sceneLoader.LoadWinScreen();
             }
             else
