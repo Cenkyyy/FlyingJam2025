@@ -160,6 +160,8 @@ public class ShopManager : MonoBehaviour
         if (tokensToSpend > 0)
         {
             myGameSession.AddCard(cardVendingMachine[slotIndex]);
+            currentCardSlots.Remove(slotIndex);
+            SetActiveCards();
             tokensToSpend -= 1;
         }
         else
@@ -174,6 +176,8 @@ public class ShopManager : MonoBehaviour
         if (tokensToSpend > 0)
         {
             CarryOutUpdate(upgradeVendingMachine[slotIndex]);
+            currentUpgradeSlots.Remove(slotIndex);
+            SetActiveUpgrades();
             tokensToSpend -= 1;
         }
         else
