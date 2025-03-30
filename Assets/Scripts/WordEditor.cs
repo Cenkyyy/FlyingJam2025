@@ -86,8 +86,15 @@ public class WordEditor : MonoBehaviour
         if (HasWon())
         {
             // YOU WIN
-            WinDelay();
-            sceneLoader.LoadNextScene();
+            if (gameSession.GetWordsCount() == 0)
+            {
+                sceneLoader.LoadWinScreen();
+            }
+            else
+            {
+                WinDelay();
+                sceneLoader.LoadNextScene();
+            }
         }
 
         if (myDeckHandlerer.IsHandEmpty())

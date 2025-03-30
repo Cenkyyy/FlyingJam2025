@@ -56,6 +56,11 @@ public class GameSession : MonoBehaviour
         playerDeck = startingDeck;
     }
 
+    public int GetWordsCount()
+    {
+        return startingWords.Count;
+    }
+
     public (string, string) GetNextWordsPair()
     {
         int randomIndex = random.Next(startingWords.Count);
