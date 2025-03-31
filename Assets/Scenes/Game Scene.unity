@@ -5528,9 +5528,25 @@ MonoBehaviour:
   startingWords:
   - pile
   - coat
+  - jump
+  - frog
+  - moon
+  - fire
+  - star
+  - sign
+  - fish
+  - game
   goalWords:
   - coat
   - desk
+  - book
+  - bell
+  - snow
+  - wave
+  - leaf
+  - song
+  - desk
+  - time
   startingDeck: 000000000000000000000000020000000200000002000000
   currentLevel: 1
   playerDeck: 
