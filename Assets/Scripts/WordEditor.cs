@@ -10,6 +10,7 @@ public class WordEditor : MonoBehaviour
 {
     private DeckHandlerer _myDeckHandlerer;
     private HandDisplay _myHandDisplay;
+    private GoalWordDisplay _myGoalWordDisplay;
     private GameSession _myGameSession;
     private SceneLoader _mySceneLoader;
 
@@ -24,9 +25,11 @@ public class WordEditor : MonoBehaviour
 
     void Start()
     {
+        _myGameSession = GameSession.Instance;
+
         _mySceneLoader = FindObjectOfType<SceneLoader>();
-        _myGameSession = FindObjectOfType<GameSession>();
         _myHandDisplay = FindObjectOfType<HandDisplay>();
+        _myGoalWordDisplay = FindObjectOfType<GoalWordDisplay>();
         _myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
         _letters = FindObjectsOfType<LetterDisplay>().ToList();
 
@@ -40,16 +43,8 @@ public class WordEditor : MonoBehaviour
             (_currentWord, _goalWord) = _myGameSession.GetNextWordsPair();
         }
 
-        Debug.Log("---");
-        Debug.Log(_currentWord);
-        Debug.Log(_goalWord);
-
-        Debug.Log(_myGameSession.currentLevel);
-        _myGameSession.currentLevel += 1;
-        Debug.Log(_myGameSession.currentLevel);
-        Debug.Log("---");
-
-        Debug.Log(_myGameSession.playerDeck.Count);
+        UpdateTextOfAllLetters();
+        _myGoalWordDisplay.UpdateText(_goalWord);
     }
 
     // Returns char from current word at given position
@@ -178,6 +173,7 @@ public class WordEditor : MonoBehaviour
             }
             else // Round was won, load the shop scene
             {
+                _myGameSession.currentLevel += 1;
                 _mySceneLoader.LoadNextScene();
             }
         }
