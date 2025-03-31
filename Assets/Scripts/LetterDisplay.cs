@@ -12,14 +12,18 @@ public class LetterDisplay : MonoBehaviour
     private char _currentLetter;
     private TextMeshProUGUI _text;
 
-    private void Start()
-    {
-        _myEditor = FindObjectOfType<WordEditor>();
-        _text = GetComponent<TextMeshProUGUI>();
-    }
-
     public void UpdateText()
     {
+        if (_text == null)
+        {
+            _text = GetComponent<TextMeshProUGUI>();
+        }
+
+        if (_myEditor == null)
+        {
+            _myEditor = FindObjectOfType<WordEditor>();
+        }
+        
         _currentLetter = _myEditor.GetLettersChar(positionID);
         _text.text = _currentLetter.ToString();
     }
