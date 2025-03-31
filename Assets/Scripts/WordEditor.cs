@@ -45,6 +45,7 @@ public class WordEditor : MonoBehaviour
 
         UpdateTextOfAllLetters();
         _myGoalWordDisplay.UpdateText(_goalWord);
+        _myHandDisplay.SetHandsCounter();
     }
 
     // Returns char from current word at given position
@@ -114,6 +115,9 @@ public class WordEditor : MonoBehaviour
 
         // update game state
         UpdateTextOfAllLetters();
+        Debug.Log(_currentWord);
+        Debug.Log(_goalWord);
+
         RemoveLastClickedHandCard();
         CheckForWin();
         CheckForEmptyHand();
@@ -188,7 +192,7 @@ public class WordEditor : MonoBehaviour
     {
         if (_myDeckHandlerer.IsHandEmpty())
         {
-            if (_myGameSession.handsCount <= 0) // No more hands available, meaning game lost
+            if (_myHandDisplay.IsEmpty()) // No more hands available, meaning game lost
             {
                 _mySceneLoader.LoadLoseScreen();
             }

@@ -5527,28 +5527,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWords:
   - pile
-  - tree
-  - book
-  - lamp
-  - fish
-  - game
-  - wind
-  - moon
-  - star
-  - rock
-  - fire
+  - coat
   goalWords:
   - coat
   - desk
-  - 'coat  '
-  - jump
-  - song
-  - door
-  - bell
-  - snow
-  - leaf
-  - time
-  - wave
   startingDeck: 000000000000000000000000020000000200000002000000
   currentLevel: 1
   playerDeck: 

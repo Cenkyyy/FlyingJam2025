@@ -150,7 +150,7 @@ public class DeckHandlerer : MonoBehaviour
     public void GetNewHand()
     {
         StartCoroutine(DisplayCardSpritesDelay());
-        _myGameSession.handsCount--;
+        
     }
 
     public bool IsHandEmpty()
