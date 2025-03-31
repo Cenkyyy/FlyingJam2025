@@ -5875,13 +5875,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 30dc9c9174b587647a109a018cd2456f, type: 3}
   - {fileID: 21300000, guid: bc31ec70fa40d954d8c516c78864fabe, type: 3}
   upgradeSprites:
+  - {fileID: 21300000, guid: 33365472a24aefb468bb58dc5209d49f, type: 3}
+  - {fileID: 21300000, guid: 694753086d2bad44db22af66cb352879, type: 3}
+  - {fileID: 21300000, guid: 1af8ecb606529a641898874610c7ccad, type: 3}
   - {fileID: 21300000, guid: 5a1528270a4d79c4e900bb3953d02207, type: 3}
-  - {fileID: 21300000, guid: c377977c2a0e40248b28d422b20c7d30, type: 3}
+  - {fileID: 21300000, guid: 50fdf769c0c1bb641b95e3f023159f52, type: 3}
   - {fileID: 21300000, guid: ed1d03d1d181d784a9f94bfe28fbab06, type: 3}
   - {fileID: 21300000, guid: 30dc9c9174b587647a109a018cd2456f, type: 3}
-  - {fileID: 21300000, guid: bc31ec70fa40d954d8c516c78864fabe, type: 3}
-  - {fileID: 21300000, guid: 50fdf769c0c1bb641b95e3f023159f52, type: 3}
-  - {fileID: 21300000, guid: 6ba7ac0b709715649a46d7fe72b32b3d, type: 3}
   maxCardSlots: 16
   maxUpgradeSlots: 16
   cardItems:
