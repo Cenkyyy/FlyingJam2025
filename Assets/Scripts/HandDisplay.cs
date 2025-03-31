@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class HandDisplay : MonoBehaviour
 {
-    private int count;
-
-    private GameSession gameSession;
-    private TextMeshProUGUI text;
+    private GameSession _gameSession;
+    private TextMeshProUGUI _text;
+    private int _count;
 
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
-        gameSession = FindObjectOfType<GameSession>();
-        count = gameSession.handsCount;
+        _text = GetComponent<TextMeshProUGUI>();
+        _gameSession = FindObjectOfType<GameSession>();
+        _count = _gameSession.handsCount;
     }
 
     public void UpdateHandsCounter()
     {
-        count--;
-        text.text = count.ToString();
+        _count--;
+        _text.text = _count.ToString();
     }
 }

@@ -6,27 +6,21 @@ using UnityEngine;
 public class LetterDisplay : MonoBehaviour
 {
     [SerializeField] int positionID;
-    
-    private char currentLetter;
-    private TextMeshProUGUI text;
 
-    private WordEditor myEditor;
+    private WordEditor _myEditor;
+
+    private char _currentLetter;
+    private TextMeshProUGUI _text;
 
     private void Start()
     {
-        myEditor = FindObjectOfType<WordEditor>();
-        text = GetComponent<TextMeshProUGUI>();
+        _myEditor = FindObjectOfType<WordEditor>();
+        _text = GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateText()
     {
-        currentLetter = myEditor.GetLettersChar(positionID);
-        text.text = currentLetter.ToString();
-    }
-
-    // Not used
-    public int GetLetterIndex()
-    {
-        return currentLetter - 'a' + 1;
+        _currentLetter = _myEditor.GetLettersChar(positionID);
+        _text.text = _currentLetter.ToString();
     }
 }
