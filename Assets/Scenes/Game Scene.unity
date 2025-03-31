@@ -4907,7 +4907,7 @@ PrefabInstance:
       objectReference: {fileID: 380450366}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyCardOperation
+      value: OnClickedLetter
       objectReference: {fileID: 0}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5526,7 +5526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingWords:
-  - hero
+  - pile
   - tree
   - book
   - lamp
@@ -5538,7 +5538,7 @@ MonoBehaviour:
   - rock
   - fire
   goalWords:
-  - zero
+  - coat
   - desk
   - 'coat  '
   - jump
@@ -6195,7 +6195,7 @@ PrefabInstance:
       objectReference: {fileID: 380450366}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyCardOperation
+      value: OnClickedLetter
       objectReference: {fileID: 0}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -7591,7 +7591,7 @@ PrefabInstance:
       objectReference: {fileID: 380450366}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyCardOperation
+      value: OnClickedLetter
       objectReference: {fileID: 0}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -9248,7 +9248,7 @@ PrefabInstance:
       objectReference: {fileID: 380450366}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyCardOperation
+      value: OnClickedLetter
       objectReference: {fileID: 0}
     - target: {fileID: 8319728098326027307, guid: 7902df63a502bcc4caeaf97140878c0a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
