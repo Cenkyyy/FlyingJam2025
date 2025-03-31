@@ -2271,7 +2271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &366003827
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2917,15 +2917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91926eebfbdd81f4ab13db6ef7a70cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundButtonCollider: {fileID: 366003826}
-  operationSprites:
-  - {fileID: 21300000, guid: 5a1528270a4d79c4e900bb3953d02207, type: 3}
-  - {fileID: 21300000, guid: 50fdf769c0c1bb641b95e3f023159f52, type: 3}
-  - {fileID: 21300000, guid: c377977c2a0e40248b28d422b20c7d30, type: 3}
-  - {fileID: 21300000, guid: 6ba7ac0b709715649a46d7fe72b32b3d, type: 3}
-  - {fileID: 21300000, guid: ed1d03d1d181d784a9f94bfe28fbab06, type: 3}
-  - {fileID: 21300000, guid: 30dc9c9174b587647a109a018cd2456f, type: 3}
-  - {fileID: 21300000, guid: bc31ec70fa40d954d8c516c78864fabe, type: 3}
   smallPlusCards:
   - {fileID: 1679923130}
   - {fileID: 841970295}
@@ -2967,7 +2958,16 @@ MonoBehaviour:
   - {fileID: 1235849429}
   - {fileID: 1690402160}
   - {fileID: 578919832}
-  handCards:
+  operationSprites:
+  - {fileID: 21300000, guid: 5a1528270a4d79c4e900bb3953d02207, type: 3}
+  - {fileID: 21300000, guid: 50fdf769c0c1bb641b95e3f023159f52, type: 3}
+  - {fileID: 21300000, guid: c377977c2a0e40248b28d422b20c7d30, type: 3}
+  - {fileID: 21300000, guid: 6ba7ac0b709715649a46d7fe72b32b3d, type: 3}
+  - {fileID: 21300000, guid: ed1d03d1d181d784a9f94bfe28fbab06, type: 3}
+  - {fileID: 21300000, guid: 30dc9c9174b587647a109a018cd2456f, type: 3}
+  - {fileID: 21300000, guid: bc31ec70fa40d954d8c516c78864fabe, type: 3}
+  backgroundButtonCollider: {fileID: 366003826}
+  handDisplay:
   - {fileID: 2063461732}
   - {fileID: 657437147}
   - {fileID: 955866092}
@@ -5549,7 +5549,7 @@ MonoBehaviour:
   - leaf
   - time
   - wave
-  startingDeck: 
+  startingDeck: 000000000000000000000000020000000200000002000000
   currentLevel: 1
   playerDeck: 
   handSize: 3
