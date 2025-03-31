@@ -7801,6 +7801,7 @@ GameObject:
   - component: {fileID: 1859831991}
   - component: {fileID: 1859831993}
   - component: {fileID: 1859831992}
+  - component: {fileID: 1859831994}
   m_Layer: 5
   m_Name: GoalWord
   m_TagString: Untagged
@@ -7924,6 +7925,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859831990}
   m_CullTransparentMesh: 1
+--- !u!114 &1859831994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859831990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ce0a63c755f25478358d62be275268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1875673243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9621,12 +9634,12 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1282955030}
   - {fileID: 269644259}
   - {fileID: 387778555}
   - {fileID: 92504195}
   - {fileID: 6132221131008802523}
   - {fileID: 380450367}
-  - {fileID: 1282955030}
   - {fileID: 682331051}
   - {fileID: 1194288086}
   - {fileID: 301708549}

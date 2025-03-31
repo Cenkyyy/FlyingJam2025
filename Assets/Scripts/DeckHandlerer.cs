@@ -38,7 +38,8 @@ public class DeckHandlerer : MonoBehaviour
 
     void Start()
     {
-        _myGameSession = FindObjectOfType<GameSession>();
+        _myGameSession = GameSession.Instance;
+
         _myWordEditor = FindObjectOfType<WordEditor>();
 
         // Card setup
@@ -70,14 +71,15 @@ public class DeckHandlerer : MonoBehaviour
             {
                 GetNewStockPile();
             }
-            int randomIndex = random.Next(cardStockPile.Count - 1);
+            int randomIndex = random.Next(cardStockPile.Count);
             handCards.Add(cardStockPile[randomIndex]);
+            cardStockPile.RemoveAt(randomIndex);
         }
     }
 
     private void GetNewStockPile()
     {
-        cardStockPile = _myGameSession.playerDeck;
+        cardStockPile = new List<GameSession.CardType>(_myGameSession.playerDeck);
     }
 
     // Coroutine that waits 1 second before dealing the cards

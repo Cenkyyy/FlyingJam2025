@@ -1,23 +1,45 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSession : MonoBehaviour
-{   
-    public static GameSession Instance { get; private set; }
+{
+    private static GameSession _instance;
+
+    public static GameSession Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameSession>();
+
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameSession");
+                    _instance = singletonObject.AddComponent<GameSession>();
+                    DontDestroyOnLoad(singletonObject);
+                }
+            }
+
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        SetPlayersDeck();
+
+        _instance = this;
         DontDestroyOnLoad(gameObject);
+        SetPlayersDeck();
     }
 
     public enum CardType
@@ -53,7 +75,7 @@ public class GameSession : MonoBehaviour
 
     void SetPlayersDeck()
     {
-        playerDeck = startingDeck;
+        playerDeck = new List<GameSession.CardType>(startingDeck);
     }
 
     public int GetWordsCount()

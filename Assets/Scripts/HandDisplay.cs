@@ -12,7 +12,7 @@ public class HandDisplay : MonoBehaviour
     void Start()
     {
         _text = GetComponent<TextMeshProUGUI>();
-        _gameSession = FindObjectOfType<GameSession>();
+        _gameSession = GameSession.Instance;
         _count = _gameSession.handsCount;
     }
 

@@ -48,7 +48,7 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        myGameSession = FindObjectOfType<GameSession>();
+        myGameSession = GameSession.Instance;
 
         tokensToSpend = 2;
         cardsPerMachine = myGameSession.shopCardCount;

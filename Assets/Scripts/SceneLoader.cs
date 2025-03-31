@@ -22,11 +22,6 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadGameScene()
     {
-        var myGamesession = FindObjectOfType<GameSession>();
-        if (myGamesession != null)
-        {
-            Destroy(myGamesession);
-        }
         SceneManager.LoadScene("Game Scene");
     }
 
