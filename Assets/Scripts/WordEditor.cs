@@ -22,9 +22,6 @@ public class WordEditor : MonoBehaviour
     private int _cardValue;
     private GameSession.CardType _cardType = GameSession.CardType.Invalid;
 
-    // Helping variables
-    private bool _isTutorial = true;
-
     void Start()
     {
         _mySceneLoader = FindObjectOfType<SceneLoader>();
@@ -33,13 +30,26 @@ public class WordEditor : MonoBehaviour
         _myDeckHandlerer = FindObjectOfType<DeckHandlerer>();
         _letters = FindObjectsOfType<LetterDisplay>().ToList();
 
-        if (_isTutorial)
+        if (_myGameSession.currentLevel == 1)
         {
             _currentWord = "hero";
             _goalWord = "zero";
-            _isTutorial = false;
         }
-        else (_currentWord, _goalWord) = _myGameSession.GetNextWordsPair();
+        else
+        {
+            (_currentWord, _goalWord) = _myGameSession.GetNextWordsPair();
+        }
+
+        Debug.Log("---");
+        Debug.Log(_currentWord);
+        Debug.Log(_goalWord);
+
+        Debug.Log(_myGameSession.currentLevel);
+        _myGameSession.currentLevel += 1;
+        Debug.Log(_myGameSession.currentLevel);
+        Debug.Log("---");
+
+        Debug.Log(_myGameSession.playerDeck.Count);
     }
 
     // Returns char from current word at given position
@@ -69,12 +79,12 @@ public class WordEditor : MonoBehaviour
         _cardValue = value;
     }
 
+    // Removes last clicked card when a card operation is applied on letter
     private void RemoveLastClickedHandCard()
     {
-        List<GameObject> handCards = _myDeckHandlerer.GetHandCards();
-        handCards[_myDeckHandlerer.GetLastCardID()].SetActive(false);
+        GameObject handCardToRemove = _myDeckHandlerer.GetLastClickedCard();
+        handCardToRemove.SetActive(false);
     }
-
 
     // Applies operation from last clicked card and last clicked card value
     // on clicked letter based on its position
@@ -164,12 +174,10 @@ public class WordEditor : MonoBehaviour
         {
             if (_myGameSession.GetWordsCount() == 0) // All of the words have been solved
             {
-                WinDelay();
                 _mySceneLoader.LoadWinScreen();
             }
             else // Round was won, load the shop scene
             {
-                WinDelay();
                 _mySceneLoader.LoadNextScene();
             }
         }
@@ -180,27 +188,12 @@ public class WordEditor : MonoBehaviour
         return _currentWord == _goalWord;
     }
 
-    // Coroutine that waits 1 second before going into the shop
-    private IEnumerator WinDelay()
-    {
-        yield return new WaitForSeconds(1f);  // Wait for 1 second
-
-    }
-
-    // Coroutine that waits 1 second before going into the shop
-    private IEnumerator LoseDelay()
-    {
-        yield return new WaitForSeconds(1f);  // Wait for 1 second
-
-    }
-
     private void CheckForEmptyHand()
     {
         if (_myDeckHandlerer.IsHandEmpty())
         {
             if (_myGameSession.handsCount <= 0) // No more hands available, meaning game lost
             {
-                LoseDelay();
                 _mySceneLoader.LoadLoseScreen();
             }
             else // Load new hand
