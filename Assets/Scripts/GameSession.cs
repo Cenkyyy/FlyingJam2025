@@ -40,6 +40,7 @@ public class GameSession : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
         SetPlayersDeck();
+        SetWordLists();
     }
 
     public enum CardType
@@ -58,6 +59,10 @@ public class GameSession : MonoBehaviour
     [SerializeField] List<string> goalWords;
     [SerializeField] List<CardType> startingDeck;
 
+    // Game stats
+    public List<string> startingWordsCopy;
+    public List<string> goalWordsCopy;
+
     // Player's stats
     public int currentLevel = 1;
     public List<CardType> playerDeck;
@@ -73,9 +78,15 @@ public class GameSession : MonoBehaviour
 
     System.Random random = new System.Random();
 
-    void SetPlayersDeck()
+    public void SetPlayersDeck()
     {
         playerDeck = new List<GameSession.CardType>(startingDeck);
+    }
+
+    public void SetWordLists()
+    {
+        startingWordsCopy = new List<string>(startingWords);
+        goalWordsCopy = new List<string>(goalWords);
     }
 
     public int GetWordsCount()
@@ -85,13 +96,14 @@ public class GameSession : MonoBehaviour
 
     public (string, string) GetNextWordsPair()
     {
-        int randomIndex = random.Next(startingWords.Count);
+        int randomStartingWord = random.Next(startingWordsCopy.Count);
+        int randomGoalWord = random.Next(goalWordsCopy.Count);
 
-        string startingWord = startingWords[randomIndex];
-        string goalWord = goalWords[randomIndex];
+        string startingWord = startingWordsCopy[randomStartingWord];
+        string goalWord = goalWordsCopy[randomGoalWord];
 
-        startingWords.RemoveAt(randomIndex);
-        goalWords.RemoveAt(randomIndex);
+        startingWordsCopy.RemoveAt(randomStartingWord);
+        goalWordsCopy.RemoveAt(randomGoalWord);
 
         return (startingWord, goalWord);
     }
